@@ -1,0 +1,11 @@
+.contact_list {
+  color: black;
+  font-style: oblique;
+  justify-content: space-between;
+  display: flex;
+  margin-bottom: 10px;
+}
+.contact__container {
+  width: 350px;
+  padding: 10px;
+}
