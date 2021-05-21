@@ -24,30 +24,31 @@ export default function ContactList() {
   );
 
   useEffect(() => {
-    console.log('Hello fetchContacts');
     dispatch(fetchContacts());
   }, [dispatch]);
 
   return (
     items.length > 0 && (
       <ul className={style.contact__container}>
-        {items.map(({ id, name, number }) => {
-          return (
-            <li className={style.contact_list} key={id}>
-              {name}: {number}
-              <Styles>
-                <Button
-                  variant="secondary"
-                  className="ml-2"
-                  type="button"
-                  onClick={() => onDeleteContact(id)}
-                >
-                  Delete
-                </Button>
-              </Styles>
-            </li>
-          );
-        })}
+        {items
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map(({ id, name, number }) => {
+            return (
+              <li className={style.contact_list} key={id}>
+                {name}: {number}
+                <Styles>
+                  <Button
+                    variant="secondary"
+                    className="ml-2"
+                    type="button"
+                    onClick={() => onDeleteContact(id)}
+                  >
+                    Delete
+                  </Button>
+                </Styles>
+              </li>
+            );
+          })}
       </ul>
     )
   );
