@@ -1,6 +1,8 @@
 import { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from 'react-bootstrap';
+import { FiEdit } from 'react-icons/fi';
+import { RiDeleteBin7Line } from 'react-icons/ri';
 import { deleteContact, fetchContacts } from '../../redux/contacts/operations';
 import { getVisibleContacts } from '../../redux/contacts/selectors';
 import PropTypes from 'prop-types';
@@ -13,7 +15,7 @@ const Styles = styled.div`
   }
 `;
 
-export default function ContactList() {
+export default function ContactList({ onOpenModal }) {
   const dispatch = useDispatch();
   const items = useSelector(getVisibleContacts);
   const onDeleteContact = useCallback(
@@ -23,9 +25,9 @@ export default function ContactList() {
     [dispatch],
   );
 
-  useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchContacts());
+  // }, [dispatch]);
 
   return (
     items.length > 0 && (
@@ -39,11 +41,19 @@ export default function ContactList() {
                 <Styles>
                   <Button
                     variant="secondary"
-                    className="ml-2"
+                    className="ml-1"
+                    type="button"
+                    onClick={() => onOpenModal()}
+                  >
+                    <FiEdit size="20" />
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    className="ml-1"
                     type="button"
                     onClick={() => onDeleteContact(id)}
                   >
-                    Delete
+                    <RiDeleteBin7Line size="20" />
                   </Button>
                 </Styles>
               </li>

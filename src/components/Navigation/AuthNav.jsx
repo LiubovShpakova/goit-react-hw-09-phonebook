@@ -1,5 +1,5 @@
-import { Button } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { Button } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 export const AuthNav = () => {
   return (
@@ -10,7 +10,7 @@ export const AuthNav = () => {
           className="nav__link"
           activeClassName="active__link"
         >
-          Sign out
+          Sign Up
         </NavLink>
       </Button>
       <Button variant="secondary" className="m-2">

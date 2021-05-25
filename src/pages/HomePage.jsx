@@ -4,9 +4,9 @@ const HomePage = () => (
   <Container>
     <h1>
       Welcome, to your Phonebook{' '}
-      <span role="img" aria-label="Иконка приветствия">
+      {/* <span role="img" aria-label="Иконка приветствия">
         💁‍♀️
-      </span>
+      </span> */}
     </h1>
   </Container>
 );

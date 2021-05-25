@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import contactActions from '../../redux/contacts/actions';
 import { getFilter } from '../../redux/contacts/selectors';
 import { Form } from 'react-bootstrap';
+
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
