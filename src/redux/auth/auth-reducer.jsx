@@ -42,20 +42,3 @@ export default combineReducers({
   loggedIn,
   error,
 });
-
-/*const user = createReducer(initialUserState, {});
-
-const token = createReducer(null, {});
-
-const loggedIn = createReducer(false, {});
-
-const setError = (_, { payload }) => payload;
-
-const error = createReducer(null, {});
-
-export default combineReducers({
-  user,
-  token,
-  loading,
-  error,
-});*/

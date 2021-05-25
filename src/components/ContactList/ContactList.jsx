@@ -1,9 +1,9 @@
-import { useEffect, useCallback } from 'react';
+import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button } from 'react-bootstrap';
 import { FiEdit } from 'react-icons/fi';
 import { RiDeleteBin7Line } from 'react-icons/ri';
-import { deleteContact, fetchContacts } from '../../redux/contacts/operations';
+import { deleteContact } from '../../redux/contacts/operations';
 import { getVisibleContacts } from '../../redux/contacts/selectors';
 import PropTypes from 'prop-types';
 import style from './ContactList.module.css';
@@ -25,16 +25,13 @@ export default function ContactList({ onOpenModal }) {
     [dispatch],
   );
 
-  // useEffect(() => {
-  //   dispatch(fetchContacts());
-  // }, [dispatch]);
-
   return (
     items.length > 0 && (
       <ul className={style.contact__container}>
         {items
           .sort((a, b) => a.name.localeCompare(b.name))
-          .map(({ id, name, number }) => {
+          .map(contact => {
+            const { id, name, number } = contact;
             return (
               <li className={style.contact_list} key={id}>
                 {name}: {number}
@@ -43,7 +40,7 @@ export default function ContactList({ onOpenModal }) {
                     variant="secondary"
                     className="ml-1"
                     type="button"
-                    onClick={() => onOpenModal()}
+                    onClick={() => onOpenModal(contact)}
                   >
                     <FiEdit size="20" />
                   </Button>
@@ -63,47 +60,6 @@ export default function ContactList({ onOpenModal }) {
     )
   );
 }
-
-/*class ContactList extends Component {
-  componentDidMount() {
-    this.props.fetchContacts();
-  }
-  render() {
-    const { items, onDeleteContact } = this.props;
-    return (
-      items.length > 0 && (
-        <ul className={style.contact__container}>
-          {items.map(({ id, name, number }) => {
-            return (
-              <li className={style.contact_list} key={id}>
-                {name}: {number}
-                <Styles>
-                  <Button
-                    variant="secondary"
-                    className="ml-2"
-                    type="button"
-                    onClick={() => onDeleteContact(id)}
-                  >
-                    Delete
-                  </Button>
-                </Styles>
-              </li>
-            );
-          })}
-        </ul>
-      )
-    );
-  }
-}
-
-const mapStateToProps = state => ({
-  items: getVisibleContacts(state),
-});
-
-const mapDispatchToProps = dispatch => ({
-  onDeleteContact: id => dispatch(deleteContact(id)),
-  fetchContacts: () => dispatch(fetchContacts()),
-});*/
 
 ContactList.propTypes = {
   items: PropTypes.array.isRequired,

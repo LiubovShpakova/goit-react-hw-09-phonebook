@@ -34,9 +34,9 @@ export const deleteContact = id => dispatch => {
     .catch(error => dispatch(contactActions.deleteContactError(error)));
 };
 export const editContact = (id, update) => dispatch => {
-  dispatch(contactActions.ditContactRequest());
+  dispatch(contactActions.editContactRequest());
   axios
     .patch(`/contacts/${id}`, update)
     .then(({ data }) => dispatch(contactActions.editContactSuccess(data)))
-    .catch(error => dispatch(contactActions.editContactError(error)));
+    .catch(error => dispatch(contactActions.editContactError(error.message)));
 };

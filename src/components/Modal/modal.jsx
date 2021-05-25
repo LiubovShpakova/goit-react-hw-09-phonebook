@@ -19,11 +19,10 @@ const Styles = styled.div`
 const modalRoot = document.querySelector('#modal-root');
 
 export default function Modal({ contactEdit, onClose }) {
-  const { contact, id } = contactEdit;
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [name, setName] = useState(contactEdit.name);
+  const [number, setNumber] = useState(contactEdit.number);
   const dispatch = useDispatch();
-  console.log(contactEdit);
+
   useEffect(() => {
     const handleKeyDown = e => {
       if (e.code === 'Escape') {
@@ -61,17 +60,17 @@ export default function Modal({ contactEdit, onClose }) {
 
   const handleSave = () => {
     const updateContact = {
-      name: name ? name : contact.name,
-      number: number ? number : contact.number,
+      name: name ? name : contactEdit.name,
+      number: number ? number : contactEdit.number,
     };
-    dispatch(editContact(id, updateContact));
+    dispatch(editContact(contactEdit.id, updateContact));
     onClose(false);
   };
   useEffect(() => {
     setName(name);
     setNumber(number);
   }, [name, number]);
-  console.log(contact);
+
   return createPortal(
     <div className="Overlay" onClick={e => handleBackdropClick(e)}>
       <div className="form__modal">
@@ -90,7 +89,7 @@ export default function Modal({ contactEdit, onClose }) {
               <Form.Control
                 type="text"
                 id={nameInputId}
-                placeholder={contact.name}
+                placeholder={contactEdit.name}
                 name="name"
                 value={name}
                 onChange={handleChange}
@@ -107,7 +106,7 @@ export default function Modal({ contactEdit, onClose }) {
                 name="number"
                 value={number}
                 onChange={handleChange}
-                placeholder={contact.number}
+                placeholder={contactEdit.number}
                 pattern="(\+?( |-|\.)?\d{1,2}( |-|\.)?)?(\(?\d{3}\)?|\d{3})( |-|\.)?(\d{3}( |-|\.)?\d{4})"
                 title="Номер телефона должен состоять из 11-12  цифр и может содержать цифры, пробелы, тире, пузатые скобки и может начинаться с +"
                 required

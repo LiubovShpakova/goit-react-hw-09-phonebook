@@ -12,9 +12,12 @@ export default function ContactsPage() {
   const [editContact, setEditContact] = useState({});
   const dispatch = useDispatch();
 
-  const handleOpenModal = (contact, id) => {
+  const handleOpenModal = contact => {
     setIsOpenModal(true);
-    setEditContact({ contact, id });
+    setEditContact(contact);
+  };
+  const handleCloseModal = () => {
+    setEditContact(null);
   };
   useEffect(() => {
     dispatch(fetchContacts());
@@ -26,8 +29,8 @@ export default function ContactsPage() {
       <ContactForm />
       <Filter />
       <ContactList onOpenModal={handleOpenModal} />
-      {isOpenModal && (
-        <Modal onClose={setIsOpenModal} contactEdit={editContact} />
+      {isOpenModal && editContact && (
+        <Modal onClose={handleCloseModal} contactEdit={editContact} />
       )}
     </Container>
   );
